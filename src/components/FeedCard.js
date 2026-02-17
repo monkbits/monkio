@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-const FeedCard = ({ item }) => {
+const FeedCard = ({ item, onCommentPress }) => {
   return (
     <View style={styles.card}>
       <View style={styles.header}>
@@ -18,7 +18,7 @@ const FeedCard = ({ item }) => {
         <TouchableOpacity style={styles.actionButton}>
           <Text style={styles.actionText}>❤️ {item.likes}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton}>
+        <TouchableOpacity style={styles.actionButton} onPress={onCommentPress}>
           <Text style={styles.actionText}>💬 {item.comments}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.actionButton}>
