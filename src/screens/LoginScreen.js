@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, SafeAreaView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -7,7 +7,7 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = () => {
     if (username === 'ankuradmin' && password === 'ankur123') {
-      navigation.replace('Home');
+      navigation.replace('Main');
     } else {
       Alert.alert('Login Failed', 'Invalid username or password');
     }
@@ -15,35 +15,45 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.title}>🎉 Welcome back!</Text>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.keyboardView}
+      >
+        <View style={styles.content}>
+          <Text style={styles.title}>Welcome back</Text>
+          <Text style={styles.subtitle}>Please sign in to continue</Text>
 
-        <View style={styles.inputContainer}>
-            <Text style={styles.label}>Username</Text>
-            <TextInput
-            style={styles.input}
-            placeholder="Enter your username"
-            value={username}
-            onChangeText={setUsername}
-            autoCapitalize="none"
-            />
+          <View style={styles.formContainer}>
+            <View style={styles.inputContainer}>
+                <Text style={styles.label}>Username</Text>
+                <TextInput
+                style={styles.input}
+                placeholder="ankuradmin"
+                value={username}
+                onChangeText={setUsername}
+                autoCapitalize="none"
+                placeholderTextColor="#ccc"
+                />
+            </View>
+
+            <View style={styles.inputContainer}>
+                <Text style={styles.label}>Password</Text>
+                <TextInput
+                style={styles.input}
+                placeholder="••••••••"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+                placeholderTextColor="#ccc"
+                />
+            </View>
+
+            <TouchableOpacity style={styles.button} onPress={handleLogin} activeOpacity={0.8}>
+              <Text style={styles.buttonText}>Sign In</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-
-        <View style={styles.inputContainer}>
-            <Text style={styles.label}>Password</Text>
-            <TextInput
-            style={styles.input}
-            placeholder="Enter your password"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            />
-        </View>
-
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -51,47 +61,68 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F2F0E4',
+    backgroundColor: '#fff',
+  },
+  keyboardView: {
+    flex: 1,
     justifyContent: 'center',
   },
   content: {
-    padding: 20,
+    padding: 30,
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 40,
+    fontWeight: '700',
+    marginBottom: 8,
     textAlign: 'center',
-    color: '#333',
+    color: '#000',
+    letterSpacing: -0.5,
+  },
+  subtitle: {
+    fontSize: 15,
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 40,
+  },
+  formContainer: {
+    width: '100%',
   },
   inputContainer: {
     marginBottom: 20,
   },
   label: {
-      fontSize: 16,
+      fontSize: 13,
       marginBottom: 8,
       fontWeight: '600',
-      color: '#555',
+      color: '#333',
+      textTransform: 'uppercase',
+      letterSpacing: 0.5,
   },
   input: {
-    backgroundColor: 'white',
-    padding: 15,
-    borderRadius: 8,
+    backgroundColor: '#f9f9f9',
+    padding: 16,
+    borderRadius: 12,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#eee',
+    color: '#000',
   },
   button: {
-    backgroundColor: '#5577AA',
-    padding: 15,
-    borderRadius: 30,
+    backgroundColor: '#000',
+    padding: 18,
+    borderRadius: 14,
     alignItems: 'center',
     marginTop: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 5,
   },
   buttonText: {
     color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
 

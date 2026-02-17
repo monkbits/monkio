@@ -83,3 +83,42 @@ export const ROOMS = [
     others: [USERS[5], USERS[6]],
   },
 ];
+
+export const FEED_ITEMS = [
+    {
+        id: 'f1',
+        author: USERS[0],
+        topic: 'Startup Ideas',
+        content: 'What is the one problem you face daily that you wish someone would solve?',
+        likes: 120,
+        comments: 45,
+        time: '2h ago',
+    },
+    {
+        id: 'f2',
+        author: USERS[2],
+        topic: 'Space Exploration',
+        content: 'Mars is the only place in the solar system where it’s possible for life to become multi-planetary.',
+        likes: 5400,
+        comments: 890,
+        time: '5h ago',
+    },
+    {
+        id: 'f3',
+        author: USERS[3],
+        topic: 'Network State',
+        content: 'The most important thing to understand about the future is that it is not pre-determined.',
+        likes: 890,
+        comments: 210,
+        time: '1d ago',
+    },
+    {
+        id: 'f4',
+        author: USERS[1],
+        topic: 'Wealth Creation',
+        content: 'Specific knowledge is found by pursuing your genuine curiosity and passion rather than whatever is hot right now.',
+        likes: 2300,
+        comments: 150,
+        time: '1d ago',
+    },
+];

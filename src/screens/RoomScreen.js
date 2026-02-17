@@ -21,7 +21,7 @@ const RoomScreen = ({ route, navigation }) => {
         <TouchableOpacity style={styles.leaveButton} onPress={() => navigation.goBack()}>
           <Text style={styles.leaveButtonText}>✌️ Leave quietly</Text>
         </TouchableOpacity>
-        <Text style={styles.roomTitle}>{room.title}</Text>
+        <Text style={styles.roomTitle} numberOfLines={2}>{room.title}</Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -30,7 +30,7 @@ const RoomScreen = ({ route, navigation }) => {
           <View style={styles.grid}>
             {room.speakers.map((user) => (
               <View key={user.id} style={styles.userContainer}>
-                <UserAvatar avatar={user.avatar} size={80} isSpeaker />
+                <UserAvatar avatar={user.avatar} size={70} isSpeaker />
                 <Text style={styles.userName}>{user.name}</Text>
               </View>
             ))}
@@ -42,7 +42,7 @@ const RoomScreen = ({ route, navigation }) => {
           <View style={styles.grid}>
             {room.others.map((user) => (
               <View key={user.id} style={styles.userContainer}>
-                <UserAvatar avatar={user.avatar} size={60} />
+                <UserAvatar avatar={user.avatar} size={50} />
                 <Text style={styles.userName}>{user.name}</Text>
               </View>
             ))}
@@ -68,61 +68,68 @@ const RoomScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F2F0E4',
+    backgroundColor: 'white',
   },
   header: {
-    padding: 20,
+    padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
-    backgroundColor: '#F2F0E4',
+    borderBottomColor: '#f0f0f0',
+    backgroundColor: 'white',
     alignItems: 'center',
+    paddingTop: 50,
   },
   leaveButton: {
     position: 'absolute',
-    left: 20,
-    top: 20,
-    padding: 10,
-    backgroundColor: '#eee',
-    borderRadius: 20,
+    left: 16,
+    top: 50,
+    padding: 8,
+    backgroundColor: '#f9f9f9',
+    borderRadius: 16,
   },
   leaveButtonText: {
     color: '#d9534f',
-    fontWeight: 'bold',
+    fontWeight: '600',
+    fontSize: 12,
   },
   roomTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '700',
     marginTop: 40,
     textAlign: 'center',
+    maxWidth: '80%',
+    lineHeight: 22,
   },
   scrollContent: {
-    padding: 20,
+    padding: 16,
     paddingBottom: 100,
   },
   section: {
-    marginBottom: 30,
+    marginBottom: 24,
   },
   sectionTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#777',
-    marginBottom: 15,
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#999',
+    marginBottom: 12,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
   },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around', // Changed to space-around for better distribution
+    justifyContent: 'flex-start',
   },
   userContainer: {
     alignItems: 'center',
-    marginBottom: 20,
-    width: '30%',
+    marginBottom: 16,
+    width: '33.33%',
   },
   userName: {
-    marginTop: 5,
-    fontSize: 14,
+    marginTop: 6,
+    fontSize: 12,
     fontWeight: '500',
     textAlign: 'center',
+    color: '#333',
   },
   errorContainer: {
     flex: 1,
@@ -137,17 +144,26 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 15,
+    paddingVertical: 12,
+    paddingBottom: 30, // Extra padding for safe area
     borderTopWidth: 1,
-    borderTopColor: '#eee',
+    borderTopColor: '#f0f0f0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
   },
   iconButton: {
     padding: 10,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 25,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 20,
+    width: 44,
+    height: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   iconText: {
-    fontSize: 24,
+    fontSize: 20,
   },
 });
 

@@ -3,7 +3,7 @@ import { View, Text, FlatList, StyleSheet, TouchableOpacity, SafeAreaView } from
 import RoomCard from '../components/RoomCard';
 import { ROOMS } from '../data/dummy';
 
-const HomeScreen = ({ navigation }) => {
+const ClubScreen = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <RoomCard room={item} onPress={() => navigation.navigate('Room', { roomId: item.id })} />
   );
@@ -33,44 +33,50 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F2F0E4', // Clubhouse-like background color
+    backgroundColor: '#F9F9F9',
   },
   header: {
-    padding: 20,
-    marginTop: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    marginBottom: 5,
   },
   greeting: {
-    fontSize: 20,
-    color: '#555',
+    fontSize: 14,
+    color: '#888',
+    fontWeight: '500',
+    marginBottom: 2,
   },
   username: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#000',
   },
   listContent: {
-    padding: 20,
-    paddingBottom: 100, // Space for the floating button
+    padding: 16,
+    paddingBottom: 100,
   },
   startButton: {
     position: 'absolute',
     bottom: 30,
     alignSelf: 'center',
     backgroundColor: '#28a745',
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    borderRadius: 30,
-    elevation: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    borderRadius: 24,
+    elevation: 4,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   startButtonText: {
     color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontWeight: '600',
   },
 });
 
-export default HomeScreen;
+export default ClubScreen;

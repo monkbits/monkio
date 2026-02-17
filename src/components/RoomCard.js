@@ -11,7 +11,7 @@ const RoomCard = ({ room, onPress }) => {
         <View style={styles.avatarsContainer}>
           {room.speakers.slice(0, 2).map((speaker, index) => (
             <View key={speaker.id} style={[styles.avatarWrapper, { zIndex: 2 - index, marginLeft: index * 15 }]}>
-               <UserAvatar avatar={speaker.avatar} size={40} />
+               <UserAvatar avatar={speaker.avatar} size={36} />
             </View>
           ))}
         </View>
@@ -36,19 +36,23 @@ const RoomCard = ({ room, onPress }) => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 15,
-    elevation: 2,
+    borderRadius: 18,
+    padding: 16,
+    marginBottom: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+    borderWidth: 1,
+    borderColor: '#f0f0f0',
   },
   roomTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 15,
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 12,
+    color: '#000',
+    lineHeight: 22,
   },
   contentContainer: {
     flexDirection: 'row',
@@ -66,17 +70,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   speakerName: {
-    fontSize: 16,
-    marginBottom: 5,
+    fontSize: 14,
+    marginBottom: 4,
+    color: '#333',
   },
   statsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 5,
+    marginTop: 4,
   },
   statsText: {
-    color: 'gray',
-    fontSize: 14,
+    color: '#888',
+    fontSize: 12,
+    fontWeight: '500',
   },
 });
 
