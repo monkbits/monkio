@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import { CURRENT_USER } from '../data/dummy';
+import { Ionicons } from '@expo/vector-icons';
 
 const ProfileScreen = () => {
   return (
@@ -29,10 +30,11 @@ const ProfileScreen = () => {
 
         <View style={styles.actions}>
             <TouchableOpacity style={styles.button}>
+                <Ionicons name="pencil-outline" size={20} color="#333" style={{ marginRight: 6 }} />
                 <Text style={styles.buttonText}>Edit Profile</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.settingsButton]}>
-                <Text style={styles.buttonText}>⚙️</Text>
+                <Ionicons name="settings-outline" size={20} color="#333" />
             </TouchableOpacity>
         </View>
       </ScrollView>
@@ -43,7 +45,7 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
   },
   content: {
       alignItems: 'center',
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
   },
   statNumber: {
       fontSize: 18,
-      fontWeight: 'bold',
+      fontWeight: '600',
       color: '#000',
   },
   statLabel: {
@@ -101,18 +103,21 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
   },
   button: {
-      paddingVertical: 10,
-      paddingHorizontal: 20,
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: 12,
+      paddingHorizontal: 24,
       borderWidth: 1,
-      borderColor: '#ccc',
-      borderRadius: 20,
-      marginHorizontal: 5,
+      borderColor: '#eee',
+      borderRadius: 24,
+      marginHorizontal: 6,
+      backgroundColor: '#f9f9f9',
   },
   settingsButton: {
       paddingHorizontal: 15,
   },
   buttonText: {
-      fontSize: 16,
+      fontSize: 15,
       fontWeight: '600',
       color: '#333',
   },

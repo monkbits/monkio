@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import UserAvatar from './UserAvatar';
+import { Ionicons } from '@expo/vector-icons';
 
 const RoomCard = ({ room, onPress }) => {
   return (
@@ -10,22 +11,26 @@ const RoomCard = ({ room, onPress }) => {
       <View style={styles.contentContainer}>
         <View style={styles.avatarsContainer}>
           {room.speakers.slice(0, 2).map((speaker, index) => (
-            <View key={speaker.id} style={[styles.avatarWrapper, { zIndex: 2 - index, marginLeft: index * 15 }]}>
-               <UserAvatar avatar={speaker.avatar} size={36} />
+            <View key={speaker.id} style={[styles.avatarWrapper, { zIndex: 2 - index, marginLeft: index * 20 }]}>
+               <UserAvatar avatar={speaker.avatar} size={40} />
             </View>
           ))}
         </View>
 
         <View style={styles.infoContainer}>
           {room.speakers.map((speaker) => (
-             <Text key={speaker.id} style={styles.speakerName}>
-               {speaker.name} 💬
-             </Text>
+             <View key={speaker.id} style={styles.speakerRow}>
+               <Text style={styles.speakerName} numberOfLines={1}>
+                 {speaker.name}
+               </Text>
+               <Ionicons name="mic-outline" size={14} color="#888" style={{marginLeft: 4}}/>
+             </View>
           ))}
           <View style={styles.statsContainer}>
-            <Text style={styles.statsText}>{room.participants} 👤</Text>
-            <Text style={styles.statsText}> / </Text>
-            <Text style={styles.statsText}>{room.speakers.length} 💬</Text>
+            <Text style={styles.statsText}>{room.participants}</Text>
+            <Ionicons name="person" size={12} color="#888" style={{marginLeft: 2, marginRight: 8}}/>
+            <Text style={styles.statsText}>{room.speakers.length}</Text>
+            <Ionicons name="mic" size={12} color="#888" style={{marginLeft: 2}}/>
           </View>
         </View>
       </View>
@@ -36,30 +41,29 @@ const RoomCard = ({ room, onPress }) => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: 'white',
-    borderRadius: 18,
-    padding: 16,
-    marginBottom: 12,
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 16,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.05,
-    shadowRadius: 4,
+    shadowRadius: 10,
     elevation: 2,
-    borderWidth: 1,
-    borderColor: '#f0f0f0',
+    marginHorizontal: 4,
   },
   roomTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 12,
+    fontSize: 18,
+    fontWeight: '700',
+    marginBottom: 16,
     color: '#000',
-    lineHeight: 22,
+    lineHeight: 24,
   },
   contentContainer: {
     flexDirection: 'row',
   },
   avatarsContainer: {
     flexDirection: 'row',
-    marginRight: 15,
+    marginRight: 16,
     width: 60,
   },
   avatarWrapper: {
@@ -69,20 +73,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  speakerRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 6,
+  },
   speakerName: {
-    fontSize: 14,
-    marginBottom: 4,
+    fontSize: 15,
     color: '#333',
+    fontWeight: '500',
   },
   statsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 4,
+    marginTop: 6,
   },
   statsText: {
     color: '#888',
-    fontSize: 12,
-    fontWeight: '500',
+    fontSize: 13,
+    fontWeight: '600',
   },
 });
 

@@ -27,22 +27,23 @@ const FeedScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9F9F9', // Lighter, cleaner background
+    backgroundColor: '#F7F7F7',
   },
   header: {
     paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: 'rgba(255,255,255,0.9)',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    paddingVertical: 10,
+    backgroundColor: '#F7F7F7',
+    marginBottom: 5,
   },
   headerTitle: {
-    fontSize: 22,
-    fontWeight: '700',
+    fontSize: 32,
+    fontWeight: '800',
     color: '#000',
+    letterSpacing: -0.5,
   },
   listContent: {
     padding: 16,
+    paddingTop: 5,
   },
 });
 

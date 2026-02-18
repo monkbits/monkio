@@ -2,10 +2,11 @@ import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import UserAvatar from '../components/UserAvatar';
 import { ROOMS } from '../data/dummy';
+import { Ionicons } from '@expo/vector-icons';
 
 const RoomScreen = ({ route, navigation }) => {
   const { roomId } = route.params;
-  const room = ROOMS.find((r) => r.id === roomId);
+  const room = ROOMS.find((r) => r.id === roomId) || ROOMS[0]; // Fallback to avoid crash if room not found
 
   if (!room) {
     return (
@@ -16,103 +17,107 @@ const RoomScreen = ({ route, navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.leaveButton} onPress={() => navigation.goBack()}>
-          <Text style={styles.leaveButtonText}>✌️ Leave quietly</Text>
-        </TouchableOpacity>
+    <View style={styles.container}>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.header}>
+            <TouchableOpacity style={styles.leaveButton} onPress={() => navigation.goBack()}>
+            <Text style={styles.leaveButtonText}>✌️ Leave quietly</Text>
+            </TouchableOpacity>
+        </View>
         <Text style={styles.roomTitle} numberOfLines={2}>{room.title}</Text>
-      </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Speakers</Text>
-          <View style={styles.grid}>
-            {room.speakers.map((user) => (
-              <View key={user.id} style={styles.userContainer}>
-                <UserAvatar avatar={user.avatar} size={70} isSpeaker />
-                <Text style={styles.userName}>{user.name}</Text>
-              </View>
-            ))}
-          </View>
-        </View>
+        <ScrollView contentContainerStyle={styles.scrollContent}>
+            <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Speakers</Text>
+            <View style={styles.grid}>
+                {room.speakers.map((user) => (
+                <View key={user.id} style={styles.userContainer}>
+                    <UserAvatar avatar={user.avatar} size={80} isSpeaker />
+                    <Text style={styles.userName} numberOfLines={1}>{user.name}</Text>
+                </View>
+                ))}
+            </View>
+            </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Others in the room</Text>
-          <View style={styles.grid}>
-            {room.others.map((user) => (
-              <View key={user.id} style={styles.userContainer}>
-                <UserAvatar avatar={user.avatar} size={50} />
-                <Text style={styles.userName}>{user.name}</Text>
-              </View>
-            ))}
-          </View>
-        </View>
-      </ScrollView>
+            {room.others && (
+                <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Others in the room</Text>
+                <View style={styles.grid}>
+                    {room.others.map((user) => (
+                    <View key={user.id} style={styles.userContainer}>
+                        <UserAvatar avatar={user.avatar} size={60} />
+                        <Text style={styles.userName} numberOfLines={1}>{user.name}</Text>
+                    </View>
+                    ))}
+                </View>
+                </View>
+            )}
+        </ScrollView>
+      </SafeAreaView>
 
       <View style={styles.bottomBar}>
         <TouchableOpacity style={styles.iconButton}>
-          <Text style={styles.iconText}>🎤</Text>
+          <Ionicons name="mic-outline" size={24} color="#000" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconButton}>
-          <Text style={styles.iconText}>✋</Text>
+          <Ionicons name="hand-right-outline" size={24} color="#000" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconButton}>
-          <Text style={styles.iconText}>➕</Text>
+        <TouchableOpacity style={[styles.iconButton, styles.addBackground]}>
+          <Ionicons name="add" size={24} color="#000" />
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
+  },
+  safeArea: {
+    flex: 1,
   },
   header: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-    backgroundColor: 'white',
-    alignItems: 'center',
-    paddingTop: 50,
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 20,
+    alignItems: 'flex-start',
   },
   leaveButton: {
-    position: 'absolute',
-    left: 16,
-    top: 50,
-    padding: 8,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 16,
+    backgroundColor: '#F2F2F7',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
   },
   leaveButtonText: {
-    color: '#d9534f',
+    color: '#FF3B30',
     fontWeight: '600',
-    fontSize: 12,
+    fontSize: 14,
   },
   roomTitle: {
-    fontSize: 16,
+    fontSize: 22,
     fontWeight: '700',
-    marginTop: 40,
     textAlign: 'center',
-    maxWidth: '80%',
-    lineHeight: 22,
+    marginHorizontal: 40,
+    marginBottom: 20,
+    color: '#000',
+    lineHeight: 28,
   },
   scrollContent: {
-    padding: 16,
+    padding: 20,
     paddingBottom: 100,
   },
   section: {
-    marginBottom: 24,
+    marginBottom: 30,
   },
   sectionTitle: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#999',
-    marginBottom: 12,
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#8E8E93',
+    marginBottom: 16,
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
+    letterSpacing: 1,
   },
   grid: {
     flexDirection: 'row',
@@ -121,15 +126,16 @@ const styles = StyleSheet.create({
   },
   userContainer: {
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 20,
     width: '33.33%',
+    paddingHorizontal: 4,
   },
   userName: {
-    marginTop: 6,
-    fontSize: 12,
+    marginTop: 8,
+    fontSize: 13,
     fontWeight: '500',
     textAlign: 'center',
-    color: '#333',
+    color: '#1C1C1E',
   },
   errorContainer: {
     flex: 1,
@@ -141,30 +147,26 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 12,
-    paddingBottom: 30, // Extra padding for safe area
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
+    alignItems: 'center',
+    paddingTop: 16,
+    paddingBottom: 34,
+    borderTopWidth: 0.5,
+    borderTopColor: '#C6C6C8',
   },
   iconButton: {
-    padding: 10,
-    backgroundColor: '#f5f5f5',
-    borderRadius: 20,
-    width: 44,
-    height: 44,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#F2F2F7',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  iconText: {
-    fontSize: 20,
-  },
+  addBackground: {
+      backgroundColor: '#E5E5EA',
+  }
 });
 
 export default RoomScreen;

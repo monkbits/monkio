@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { StyleSheet, View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, Bubble, Send } from 'react-native-gifted-chat';
 import { CURRENT_USER } from '../data/dummy';
+import { Ionicons } from '@expo/vector-icons';
 
 const ChatScreen = ({ route, navigation }) => {
   const { user } = route.params;
@@ -26,14 +27,50 @@ const ChatScreen = ({ route, navigation }) => {
     setMessages(previousMessages => GiftedChat.append(previousMessages, messages));
   }, []);
 
+  const renderBubble = (props) => {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: '#007AFF',
+          },
+          left: {
+            backgroundColor: '#f0f0f0',
+          },
+        }}
+        textStyle={{
+          right: {
+            color: '#fff',
+          },
+          left: {
+            color: '#000',
+          },
+        }}
+      />
+    );
+  };
+
+  const renderSend = (props) => {
+    return (
+      <Send {...props}>
+        <View style={styles.sendingContainer}>
+          <Ionicons name="send" size={24} color="#007AFF" />
+        </View>
+      </Send>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-             <Text style={styles.backButtonText}>Back</Text>
+             <Ionicons name="chevron-back" size={28} color="#007AFF" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>{user.name}</Text>
-        <View style={{width: 40}} />
+        <TouchableOpacity style={styles.headerAction}>
+             <Ionicons name="ellipsis-horizontal" size={24} color="#007AFF" />
+        </TouchableOpacity>
       </View>
       <GiftedChat
         messages={messages}
@@ -44,7 +81,10 @@ const ChatScreen = ({ route, navigation }) => {
           avatar: CURRENT_USER.avatar,
         }}
         showUserAvatar
+        renderBubble={renderBubble}
+        renderSend={renderSend}
         alwaysShowSend
+        scrollToBottom
       />
     </SafeAreaView>
   );
@@ -62,19 +102,25 @@ const styles = StyleSheet.create({
       paddingHorizontal: 16,
       paddingVertical: 12,
       borderBottomWidth: 1,
-      borderBottomColor: '#eee',
-      backgroundColor: '#f9f9f9',
+      borderBottomColor: '#f0f0f0',
+      backgroundColor: '#fff',
   },
   headerTitle: {
-      fontSize: 16,
+      fontSize: 17,
       fontWeight: '600',
+      color: '#000',
   },
   backButton: {
-      padding: 8,
+      padding: 4,
   },
-  backButtonText: {
-      color: '#007AFF',
-      fontSize: 16,
+  headerAction: {
+      padding: 4,
+  },
+  sendingContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+    marginBottom: 10,
   },
 });
 

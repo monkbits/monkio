@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import RoomCard from '../components/RoomCard';
 import { ROOMS } from '../data/dummy';
+import { Ionicons } from '@expo/vector-icons';
 
 const ClubScreen = ({ navigation }) => {
   const renderItem = ({ item }) => (
@@ -24,7 +25,8 @@ const ClubScreen = ({ navigation }) => {
       />
 
       <TouchableOpacity style={styles.startButton} onPress={() => {}}>
-        <Text style={styles.startButtonText}>+ Start a room</Text>
+        <Ionicons name="add" size={24} color="white" style={{ marginRight: 8 }} />
+        <Text style={styles.startButtonText}>Start a room</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -33,25 +35,25 @@ const ClubScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: '#F7F7F7',
   },
   header: {
     paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: 'rgba(255,255,255,0.9)',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    paddingVertical: 10,
+    backgroundColor: '#F7F7F7',
     marginBottom: 5,
   },
   greeting: {
     fontSize: 14,
     color: '#888',
-    fontWeight: '500',
-    marginBottom: 2,
+    fontWeight: '600',
+    marginBottom: 4,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   username: {
-    fontSize: 22,
-    fontWeight: '700',
+    fontSize: 28,
+    fontWeight: '800',
     color: '#000',
   },
   listContent: {
@@ -63,19 +65,21 @@ const styles = StyleSheet.create({
     bottom: 30,
     alignSelf: 'center',
     backgroundColor: '#28a745',
-    paddingVertical: 10,
+    paddingVertical: 12,
     paddingHorizontal: 24,
-    borderRadius: 24,
+    borderRadius: 30,
     elevation: 4,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
-    shadowRadius: 4,
+    shadowRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   startButtonText: {
     color: 'white',
-    fontSize: 15,
-    fontWeight: '600',
+    fontSize: 16,
+    fontWeight: '700',
   },
 });
 
