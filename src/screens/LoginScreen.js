@@ -28,7 +28,7 @@ const LoginScreen = ({ navigation }) => {
                 <Text style={styles.label}>Username</Text>
                 <TextInput
                 style={styles.input}
-                placeholder="ankuradmin"
+                placeholder="username or email"
                 value={username}
                 onChangeText={setUsername}
                 autoCapitalize="none"
