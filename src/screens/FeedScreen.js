@@ -3,12 +3,9 @@ import { View, FlatList, StyleSheet, SafeAreaView, Text } from 'react-native';
 import FeedCard from '../components/FeedCard';
 import { FEED_ITEMS } from '../data/dummy';
 
-const FeedScreen = ({ navigation }) => {
+const FeedScreen = () => {
   const renderItem = ({ item }) => (
-    <FeedCard
-      item={item}
-      onCommentPress={() => navigation.navigate('Comments', { feedId: item.id })}
-    />
+    <FeedCard item={item} />
   );
 
   return (
@@ -30,7 +27,7 @@ const FeedScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: '#F9F9F9', // Lighter, cleaner background
   },
   header: {
     paddingHorizontal: 20,

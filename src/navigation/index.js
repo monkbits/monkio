@@ -6,10 +6,6 @@ import ClubScreen from '../screens/ClubScreen';
 import FeedScreen from '../screens/FeedScreen';
 import RoomScreen from '../screens/RoomScreen';
 import LoginScreen from '../screens/LoginScreen';
-import CommentsScreen from '../screens/CommentsScreen';
-import MessageListScreen from '../screens/MessageListScreen';
-import ChatScreen from '../screens/ChatScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,24 +49,6 @@ const TabNavigator = () => {
             )
         }}
       />
-      <Tab.Screen
-        name="Messages"
-        component={MessageListScreen}
-        options={{
-            tabBarIcon: ({ color, size }) => (
-                <Text style={{ fontSize: size, color }}>✉️</Text>
-            )
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-            tabBarIcon: ({ color, size }) => (
-                <Text style={{ fontSize: size, color }}>👤</Text>
-            )
-        }}
-      />
     </Tab.Navigator>
   );
 };
@@ -81,8 +59,6 @@ const AppNavigator = () => {
       <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Main" component={TabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="Room" component={RoomScreen} options={{ presentation: 'modal', headerShown: false }} />
-      <Stack.Screen name="Comments" component={CommentsScreen} options={{ presentation: 'modal', title: 'Comments' }} />
-      <Stack.Screen name="Chat" component={ChatScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
