@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 import { CHATS } from '../data/dummy';
+import { Ionicons } from '@expo/vector-icons';
 
 const MessageListScreen = ({ navigation }) => {
   const renderItem = ({ item }) => (
@@ -30,6 +31,9 @@ const MessageListScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Messages</Text>
+        <TouchableOpacity style={styles.newMessageButton}>
+            <Ionicons name="create-outline" size={24} color="#000" />
+        </TouchableOpacity>
       </View>
       <FlatList
         data={CHATS}
@@ -48,33 +52,39 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: 20,
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    paddingVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 5,
   },
   headerTitle: {
-    fontSize: 22,
-    fontWeight: '700',
+    fontSize: 32,
+    fontWeight: '800',
+    color: '#000',
+    letterSpacing: -0.5,
+  },
+  newMessageButton: {
+      padding: 5,
   },
   list: {
-    padding: 0,
+    paddingBottom: 20,
   },
   chatItem: {
     flexDirection: 'row',
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f5f5f5',
     alignItems: 'center',
   },
   avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 15,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    marginRight: 16,
     backgroundColor: '#eee',
   },
   chatInfo: {
     flex: 1,
+    justifyContent: 'center',
   },
   chatHeader: {
     flexDirection: 'row',
@@ -87,29 +97,31 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   time: {
-    fontSize: 12,
+    fontSize: 13,
     color: '#888',
   },
   lastMessage: {
-    fontSize: 14,
+    fontSize: 15,
     color: '#666',
+    lineHeight: 20,
   },
   unreadMessage: {
     color: '#000',
-    fontWeight: '500',
+    fontWeight: '600',
   },
   unreadBadge: {
     backgroundColor: '#007AFF',
-    width: 20,
+    minWidth: 20,
     height: 20,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 10,
+    paddingHorizontal: 6,
   },
   unreadText: {
     color: 'white',
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: 'bold',
   },
 });
